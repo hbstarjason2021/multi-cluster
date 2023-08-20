@@ -1,6 +1,8 @@
 
 ### https://submariner.io/getting-started/quickstart/k3s/
 
+snap install yq 
+
 ### Deploy cluster-a 
 POD_CIDR=10.44.0.0/16
 SERVICE_CIDR=10.45.0.0/16
