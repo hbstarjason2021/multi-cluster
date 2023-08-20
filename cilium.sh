@@ -21,3 +21,6 @@ sudo tar xzvfC cilium-linux-amd64.tar.gz /usr/local/bin
 rm cilium-linux-amd64.tar.gz{,.sha256sum}
 cilium version
 
+## cilium install
+## cilium status --wait
+## cilium connectivity test
