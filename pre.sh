@@ -14,7 +14,8 @@ curl -sSL https://github.com/hidetatz/kubecolor/releases/download/v${KUBECOLOR_V
 kubecolor version --client
 
 ### Install kubectx
-curl -sSL https://github.com/ahmetb/kubectx/releases/download/v0.9.5/kubectx_v0.9.5_linux_x86_64.tar.gz | sudo tar xz -C /usr/local/bin kubectx
+KUBECTX_VERSION=(curl -s https://api.github.com/repos/ahmetb/kubectx/releases | jq -r '.[0].tag_name')
+curl -sSL https://github.com/ahmetb/kubectx/releases/download/${KUBECTX_VERSION}/kubectx_${KUBECTX_VERSION}_linux_x86_64.tar.gz | sudo tar xz -C /usr/local/bin kubectx
 
 ### Install Helm 
 curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
