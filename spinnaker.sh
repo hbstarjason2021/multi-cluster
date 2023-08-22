@@ -1,3 +1,5 @@
+#!/bin/bash
+set -eux
 
 ####
 # MINIO_ROOT_USER=$(< /dev/urandom tr -dc a-z | head -c${1:-4})
