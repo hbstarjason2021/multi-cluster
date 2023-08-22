@@ -9,3 +9,7 @@ k3s check-config
 
 ### 国内安装k3s
 #curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -
+
+mkdir -p ~/.kube 
+cp /etc/rancher/k3s/k3s.yaml  ~/.kube/config
+kubectl get node 
