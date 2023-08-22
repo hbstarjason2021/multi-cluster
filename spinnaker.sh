@@ -17,6 +17,11 @@ docker run -it -d --rm -v ~/.minio-data/:/data --name minio-4-spinnaker \
  -e "MINIO_KMS_SECRET_KEY_FILE=minio-encryption-key:${MINIO_ENCRYPTION_KEY}" \
  minio/minio  server /data --address :${MINIO_PORT}
 
+
+MINIO_ROOT_USER=${MINIO_ROOT_USER}
+MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD}
+ENDPOINT=http://$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' minio-4-spinnaker):${MINIO_PORT}
+
 echo "
 MINIO_ROOT_USER=${MINIO_ROOT_USER}
 MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD}
@@ -29,6 +34,7 @@ echo ${MINIO_ROOT_PASSWORD} | hal config storage s3 edit \
   --endpoint ${ENDPOINT}  --no-validate
 
 chmod 777 /root/ && chmod 777 /root/.kube/config
+
 ## hal version list
 hal config version edit --version 1.30.3
 
@@ -37,7 +43,6 @@ mkdir -p ~/.hal/$DEPLOYMENT/profiles/
 echo spinnaker.s3.versioning: false > ~/.hal/$DEPLOYMENT/profiles/front50-local.yml
 
 hal config storage edit --type s3 --no-validate
-
 
 hal config provider kubernetes enable
 hal config provider kubernetes account add my-k8s-new \
