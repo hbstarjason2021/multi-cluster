@@ -5,8 +5,11 @@ curl -O https://raw.githubusercontent.com/spinnaker/halyard/master/install/debia
     hal -v 
 
 ####
-MINIO_ROOT_USER=$(< /dev/urandom tr -dc a-z | head -c${1:-4})
-MINIO_ROOT_PASSWORD=$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-8})
+# MINIO_ROOT_USER=$(< /dev/urandom tr -dc a-z | head -c${1:-4})
+# MINIO_ROOT_PASSWORD=$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-8})
+MINIO_ROOT_USER=minioadmin
+MINIO_ROOT_PASSWORD=minioadmin
+MINIO_ENCRYPTION_KEY=minio-encryption-key
 MINIO_PORT="9010"
 
 # Start the container
