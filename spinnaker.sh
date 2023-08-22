@@ -13,8 +13,11 @@ MINIO_ENCRYPTION_KEY=minio-encryption-key
 MINIO_PORT="9010"
 
 # Start the container
-docker run -it -d --rm -v ~/.minio-data/:/data --name minio-4-spinnaker -p ${MINIO_PORT}:${MINIO_PORT} \
- -e MINIO_ROOT_USER=${MINIO_ROOT_USER} -e  MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD} \
+docker run -it -d --rm -v ~/.minio-data/:/data --name minio-4-spinnaker \
+ -p ${MINIO_PORT}:${MINIO_PORT} \
+ -e "MINIO_ROOT_USER=${MINIO_ROOT_USER}" \
+ -e "MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD}" \
+ -e "MINIO_KMS_SECRET_KEY_FILE=minio-encryption-key:${MINIO_ENCRYPTION_KEY}" \
  minio/minio  server /data --address :${MINIO_PORT}
 
 echo "
