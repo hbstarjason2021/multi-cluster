@@ -45,3 +45,4 @@ hal config provider kubernetes account add my-k8s-new \
            --context $(kubectl config current-context)
 hal config deploy edit --type=distributed --account-name my-k8s-new
 
+hal deploy apply 
