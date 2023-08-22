@@ -31,6 +31,8 @@ echo ${MINIO_ROOT_PASSWORD} | hal config storage s3 edit \
   --secret-access-key \
   --endpoint ${ENDPOINT}  --no-validate
 
+## hal version list
+hal config version edit --version 1.30.3
 
 DEPLOYMENT="default"
 mkdir -p ~/.hal/$DEPLOYMENT/profiles/
