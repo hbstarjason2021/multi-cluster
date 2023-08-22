@@ -28,6 +28,7 @@ echo ${MINIO_ROOT_PASSWORD} | hal config storage s3 edit \
   --secret-access-key \
   --endpoint ${ENDPOINT}  --no-validate
 
+chmod 777 /root/ && chmod 777 /root/.kube/config
 ## hal version list
 hal config version edit --version 1.30.3
 
