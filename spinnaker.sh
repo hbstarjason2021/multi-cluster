@@ -25,3 +25,23 @@ MINIO_ROOT_USER=${MINIO_ROOT_USER}
 MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD}
 ENDPOINT=http://$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' minio-4-spinnaker):${MINIO_PORT} "
 
+
+echo ${MINIO_ROOT_PASSWORD} | hal config storage s3 edit \
+  --access-key-id ${MINIO_ROOT_USER} \
+  --secret-access-key \
+  --endpoint ${ENDPOINT}  --no-validate
+
+
+DEPLOYMENT="default"
+mkdir -p ~/.hal/$DEPLOYMENT/profiles/
+echo spinnaker.s3.versioning: false > ~/.hal/$DEPLOYMENT/profiles/front50-local.yml
+
+hal config storage edit --type s3 --no-validate
+
+
+hal config provider kubernetes enable
+hal config provider kubernetes account add my-k8s-new \
+           --provider-version v2 \
+           --context $(kubectl config current-context)
+hal config deploy edit --type=distributed --account-name my-k8s-new
+
