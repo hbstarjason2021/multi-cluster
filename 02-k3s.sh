@@ -40,4 +40,22 @@ systemctl restart k3s
 
 crictl info |grep mirrors -h5
 
+###############
+
+kubectl create deploy whoami --image=traefik/whoami --replicas=2
+
+kubectl scale deploy whoami --replicas=5
+
+kubectl expose deploy whoami --port=80
+kubectl get svc -owide
+kubectl describe svc whoami
+
+# 在本地通过 service 多访问几次，出轮询访问 container
+# curl http://<external-ip>:<port>
+
+curl `kubectl get -o template service/whoami --template='{{.spec.clusterIP}}'`
+
+# 自行替换 <PUBLIC_IP> 为当前节点的公网 IP
+kubectl expose deploy whoami --type=LoadBalancer --port=80 --external-ip <PUBLIC_IP>
+
 COMMENT
