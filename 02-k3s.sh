@@ -36,4 +36,8 @@ mirrors:
       - "https://registry.docker-cn.com"
 EOF
 
+systemctl restart k3s
+
+crictl info |grep mirrors -h5
+
 COMMENT
