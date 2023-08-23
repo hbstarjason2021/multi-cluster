@@ -12,6 +12,10 @@ cp /etc/rancher/k3s/k3s.yaml  ~/.kube/config
 kubectl get node 
 
 
+### 卸载
+# /usr/local/bin/k3s-uninstall.sh
+# /usr/local/bin/k3s-agent-uninstall.sh
+
 ########################### ### 国内安装k3s
 :<<COMMENT
 
