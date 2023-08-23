@@ -27,7 +27,7 @@ kubectl get node
 #curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -
 
 
-curl –sfL \
+curl -sfL \
      https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh | \
      INSTALL_K3S_MIRROR=cn sh -s - \
      --system-default-registry "registry.cn-hangzhou.aliyuncs.com" \
