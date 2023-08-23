@@ -10,8 +10,8 @@ k3s check-config
 mkdir -p ~/.kube 
 cp /etc/rancher/k3s/k3s.yaml  ~/.kube/config
 
-perl -pi -e 's/certificate-authority-data:.*/insecure-skip-tls-verify: true/g'  ~/.kube/config
-perl -pi -e "s/127.0.0.1/$(curl -sS ip.sb)/g"  ~/.kube/config
+# perl -pi -e 's/certificate-authority-data:.*/insecure-skip-tls-verify: true/g'  ~/.kube/config
+# perl -pi -e "s/127.0.0.1/$(curl -sS ip.sb)/g"  ~/.kube/config
 
 kubectl cluster-info
 kubectl get node 
