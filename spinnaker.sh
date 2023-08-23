@@ -1,7 +1,7 @@
 #!/bin/bash
 set -eux
 
-####
+#### minio
 # MINIO_ROOT_USER=$(< /dev/urandom tr -dc a-z | head -c${1:-4})
 # MINIO_ROOT_PASSWORD=$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-8})
 MINIO_ROOT_USER=minioadmin
@@ -9,7 +9,8 @@ MINIO_ROOT_PASSWORD=minioadmin
 MINIO_ENCRYPTION_KEY=minio-encryption-key
 MINIO_PORT="9010"
 
-# Start the container
+# Start minio container
+docker pull minio/minio
 docker run -it -d --rm -v ~/.minio-data/:/data --name minio-4-spinnaker \
  -p ${MINIO_PORT}:${MINIO_PORT} \
  -e "MINIO_ROOT_USER=${MINIO_ROOT_USER}" \
