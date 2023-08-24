@@ -4,7 +4,6 @@ set -eux
 
 curl -sfL https://get.k3s.io | sh -s - \
   --docker \
-  --no-flannel \
   --disable-network-policy \
   --disable "servicelb" \
   --disable "traefik" \
