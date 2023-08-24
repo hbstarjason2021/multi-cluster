@@ -19,6 +19,8 @@ cp /etc/rancher/k3s/k3s.yaml  ~/.kube/config
 kubectl cluster-info
 kubectl get node 
 
+## echo "> waiting for kubernetes node(s) become ready"
+## kubectl wait --for=condition=ready node --all --timeout=60s
 
 ### ls -l  /var/lib/rancher/k3s/server/manifests
 
