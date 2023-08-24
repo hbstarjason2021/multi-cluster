@@ -24,3 +24,4 @@ cilium version
 ## cilium install
 ## cilium status --wait
 ## cilium connectivity test
+## cilium hubble enable --ui
