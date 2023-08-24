@@ -69,7 +69,7 @@ kubectl describe svc whoami
 # 在本地通过 service 多访问几次，出轮询访问 container
 # curl http://<external-ip>:<port>
 
-curl `kubectl get -o template service/whoami --template='{{.spec.clusterIP}}'`
+# curl `kubectl get -o template service/whoami --template='{{.spec.clusterIP}}'`
 
 # 自行替换 <PUBLIC_IP> 为当前节点的公网 IP
 kubectl expose deploy whoami --type=LoadBalancer --port=80 --external-ip <PUBLIC_IP>
