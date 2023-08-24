@@ -1,9 +1,18 @@
 #!/bin/bash
 set -eux
 
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
+
 ### Install KIND
-KIND_VESION="v0.20.0"
-curl -Lo /usr/bin/kind https://kind.sigs.k8s.io/dl/${KIND_VESION}/kind-linux-amd64 && chmod +x /usr/bin/kind
+KIND_VERSION="${KIND_VERSION:-v0.20.0}"
+
+## KIND_CLUSTER_VERSION="${KIND_CLUSTER_VERSION:-v1.25.11}"
+
+if ! hash kind > /dev/null 2>&1 ; then
+    echo "# Installing KinD..."
+    curl -Lo /usr/bin/kind https://kind.sigs.k8s.io/dl/${KIND_VERSION}/kind-linux-amd64 && chmod +x /usr/bin/kind
+fi
+
 kind version 
 
 ### Install Kubectl 
