@@ -13,9 +13,14 @@ cp /etc/rancher/k3s/k3s.yaml  ~/.kube/config
 # perl -pi -e 's/certificate-authority-data:.*/insecure-skip-tls-verify: true/g'  ~/.kube/config
 # perl -pi -e "s/127.0.0.1/$(curl -sS ip.sb)/g"  ~/.kube/config
 
+# LOCAL_IP=$(ifconfig eth0 |grep "inet "| awk '{print $2}')
+# sed -i "s/127.0.0.1/$LOCAL_IP/g"  ~/.kube/config
+
 kubectl cluster-info
 kubectl get node 
 
+
+### ls -l  /var/lib/rancher/k3s/server/manifests
 
 ### 卸载
 # /usr/local/bin/k3s-uninstall.sh
