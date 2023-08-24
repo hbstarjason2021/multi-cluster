@@ -2,7 +2,9 @@
 
 set -eux
 
-curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC='--flannel-backend=none --no-flannel' sh -s - \
+curl -sfL https://get.k3s.io | sh -s - \
+  --docker \
+  --no-flannel \
   --disable-network-policy \
   --disable "servicelb" \
   --disable "traefik" \
