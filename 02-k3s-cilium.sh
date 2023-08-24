@@ -1,9 +1,12 @@
 #!/bin/bash
 
+## https://ysicing.me/posts/how-to-use-cilium-to-replace-k3s-flannel/
+
 set -eux
 
 curl -sfL https://get.k3s.io | sh -s - \
   --docker \
+  --flannel-backend none \
   --disable-network-policy \
   --disable "servicelb" \
   --disable "traefik" \
@@ -28,4 +31,5 @@ helm install cilium cilium/cilium --version 1.14.1 \
    --set nodePort.enabled=true \
    --set hostPort.enabled=true \
    --set cluster.name=c1 \
-   --set cluster.id=1
+   --set cluster.id=1 
+
