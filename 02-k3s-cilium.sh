@@ -10,6 +10,10 @@ curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC='--flannel-backend=none --no-fla
 
 sudo cat /etc/rancher/k3s/k3s.yaml > ~/.kube/config
 
+# update k3s unit file to kill all subprocesses when stopping
+# sudo sed -i "s/KillMode=process/KillMode=mixed/g" /etc/systemd/system/k3s.service
+# sudo systemctl daemon-reload
+
 ## kubectl create -f https://raw.githubusercontent.com/cilium/cilium/v1.7/install/kubernetes/quick-install.yaml
 
 helm repo add cilium https://helm.cilium.io/
