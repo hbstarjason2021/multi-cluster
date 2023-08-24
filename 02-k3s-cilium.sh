@@ -1,5 +1,8 @@
 #!/bin/bash
 
+### https://www.bookstack.cn/read/cilium-1.12-en/b1e3144630f1fde6.md
+### curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC='--flannel-backend=none --disable-network-policy' sh -
+
 ## https://ysicing.me/posts/how-to-use-cilium-to-replace-k3s-flannel/
 
 set -eux
