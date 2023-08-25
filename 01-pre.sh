@@ -35,4 +35,5 @@ curl -sSL https://github.com/ahmetb/kubectx/releases/download/${KUBECTX_VERSION}
 
 ### Install Helm 
 curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+# curl -sSL https://jihulab.com/hbstarjason/ali-init/-/raw/main/helm-v3.11.3-linux-amd64.tar.gz | sudo tar xz -C /usr/local/bin --strip-components=1 linux-amd64/helm
 helm version 
