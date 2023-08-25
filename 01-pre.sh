@@ -11,6 +11,7 @@ KIND_VERSION="${KIND_VERSION:-v0.20.0}"
 if ! hash kind > /dev/null 2>&1 ; then
     echo "# Installing KinD..."
     curl -Lo /usr/bin/kind https://kind.sigs.k8s.io/dl/${KIND_VERSION}/kind-linux-amd64 && chmod +x /usr/bin/kind
+    # curl -Lo /usr/bin/kind  https://jihulab.com/hbstarjason/ali-init/-/raw/main/kind-linux-amd64-v0.20.0 && chmod +x /usr/bin/kind
 fi
 
 kind version 
