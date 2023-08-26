@@ -10,15 +10,7 @@ kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.10/conf
 sleep 10
 kubectl wait --namespace metallb-system --for=condition=ready pod --selector=app=metallb --timeout=30s
 
-#############
-kubectl apply -f - <<EOF
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: metallb-system
-  labels:
-    app: metallb   
-EOF  
+
 
 subnet=$(docker network inspect kind | jq -r '.[].IPAM.Config[].Subnet' | grep -P '^(?:[0-9]{1,3}\.){3}[0-9]{1,3}/.*$')
 
