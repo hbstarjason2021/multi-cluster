@@ -32,9 +32,12 @@ MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD}
 ENDPOINT=http://$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' minio-4-spinnaker):${MINIO_PORT} "
 
 ## wget http://dl.minio.org.cn/client/mc/release/linux-amd64/mc
-## ./mc config host add minio210 http://172.30.1.2:9010 minioadmin minioadmin
+## ./mc config host add minio2023 http://172.30.1.2:9010 minioadmin minioadmin
 ## ./mc config host list
-## ./mc mb minio210/bucket8
+## ./mc mb minio2023/bucket8
+## ./mc ls minio22023
+
+## ./mc cp terraform_1.5.2_linux_amd64.zip minio2023/bucket8 
 
 
 echo ${MINIO_ROOT_PASSWORD} | hal config storage s3 edit \
