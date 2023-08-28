@@ -15,10 +15,11 @@ MINIO_PORT="9010"
 docker pull minio/minio
 docker run -it -d --rm -v ~/.minio-data/:/data --name minio-4-spinnaker \
  -p ${MINIO_PORT}:${MINIO_PORT} \
+ -p 9011:9011 \
  -e "MINIO_ROOT_USER=${MINIO_ROOT_USER}" \
  -e "MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD}" \
  -e "MINIO_KMS_SECRET_KEY_FILE=minio-encryption-key:${MINIO_ENCRYPTION_KEY}" \
- minio/minio  server /data --address :${MINIO_PORT}
+ minio/minio  server /data --address :${MINIO_PORT}  --console-address '0.0.0.0:9011'
 
 
 MINIO_ROOT_USER=${MINIO_ROOT_USER}
