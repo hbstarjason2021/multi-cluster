@@ -22,14 +22,14 @@ curl -L -o /usr/bin/kubectl "https://dl.k8s.io/release/$(curl -L -s https://dl.k
 kubectl version --client
 
 ### Install kubecolor
-KUBECOLOR_VERSION=0.0.25
+KUBECOLOR_VERSION="0.0.25"
 curl -sSL https://github.com/hidetatz/kubecolor/releases/download/v${KUBECOLOR_VERSION}/kubecolor_${KUBECOLOR_VERSION}_Linux_x86_64.tar.gz | sudo tar xz -C /usr/local/bin kubecolor
 kubecolor version --client
 
 ### Install kubectx
 apt install jq -y
 
-KUBECTX_VERSION=v0.9.5
+KUBECTX_VERSION="v0.9.5"
 # KUBECTX_VERSION=$(curl -s https://api.github.com/repos/ahmetb/kubectx/releases | jq -r '.[0].tag_name')
 curl -sSL https://github.com/ahmetb/kubectx/releases/download/${KUBECTX_VERSION}/kubectx_${KUBECTX_VERSION}_linux_x86_64.tar.gz | sudo tar xz -C /usr/local/bin kubectx
 # curl  https://jihulab.com/hbstarjason/ali-init/-/raw/main/kubectx_v0.9.5_linux_x86_64.tar.gz | sudo tar xz -C /usr/local/bin kubectx
@@ -38,6 +38,14 @@ curl -sSL https://github.com/ahmetb/kubectx/releases/download/${KUBECTX_VERSION}
 curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 # curl -sSL https://jihulab.com/hbstarjason/ali-init/-/raw/main/helm-v3.11.3-linux-amd64.tar.gz | sudo tar xz -C /usr/local/bin --strip-components=1 linux-amd64/helm
 helm version 
+
+### Install terraform
+TF_VERSION="1.5.6"
+curl -LO https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip
+unzip terraform_${TF_VERSION}_linux_amd64.zip
+mv terraform /usr/local/bin
+terraform version   
+terraform -install-autocomplete
 
 ### Install cilium
 ### https://docs.cilium.io/en/v1.10/gettingstarted/k8s-install-default/
