@@ -1,6 +1,8 @@
 #!/bin/bash
 set -eux
 
+export IP=$(ip addr show dev $(ip r | grep default | tr ' ' \\n | grep -A1 dev | tail -n1) | grep 'inet ' | awk '{print $2}' | cut -d/ -f1); echo $IP
+
 #### minio
 # MINIO_ROOT_USER=$(< /dev/urandom tr -dc a-z | head -c${1:-4})
 # MINIO_ROOT_PASSWORD=$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-8})
