@@ -31,6 +31,8 @@ apt install jq -y
 
 KUBECTX_VERSION="v0.9.5"
 # KUBECTX_VERSION=$(curl -s https://api.github.com/repos/ahmetb/kubectx/releases | jq -r '.[0].tag_name')
+# KUBECTX_VERSION=$(curl -s -N https://api.github.com/repos/ahmetb/kubectx/releases | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/' | head -n 1)
+
 curl -sSL https://github.com/ahmetb/kubectx/releases/download/${KUBECTX_VERSION}/kubectx_${KUBECTX_VERSION}_linux_x86_64.tar.gz | sudo tar xz -C /usr/local/bin kubectx
 # curl  https://jihulab.com/hbstarjason/ali-init/-/raw/main/kubectx_v0.9.5_linux_x86_64.tar.gz | sudo tar xz -C /usr/local/bin kubectx
 
