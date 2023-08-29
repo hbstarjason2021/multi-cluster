@@ -36,11 +36,26 @@ fi
 kubectl version --client
 }
 
+###### Install nexttrace
+## https://mtr.moe/README_zh_CN.html
+
+function install_nexttrace() {
+
+if [ "$countryCode" == "CN" ]; then
+echo -e "检测到国内环境，正在使用镜像下载"
+  bash <(curl -Ls https://ghproxy.com/https://raw.githubusercontent.com/sjlleo/nexttrace/main/nt_install.sh)
+else
+  bash <(curl -Ls https://raw.githubusercontent.com/sjlleo/nexttrace/main/nt_install.sh)
+fi
+
+}
 
 getLocation
 
 install_kind
 install_kubectl
+install_nexttrace
+
 
 
 
