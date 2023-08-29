@@ -48,6 +48,8 @@ install_kubectl
 KUBECOLOR_VERSION="0.0.25"
 # KUBECOLOR_VERSION=$(curl -s -N https://api.github.com/repos/hidetatz/kubecolor/releases | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/' | head -n 1)
 
+latestURL=$(curl -s https://api.github.com/repos/hidetatz/kubecolor/releases/latest | grep -i "browser_download_url.*${osDistribution}.*${archParam}" | awk -F '"' '{print $4}')
+
 curl -sSL https://github.com/hidetatz/kubecolor/releases/download/v${KUBECOLOR_VERSION}/kubecolor_${KUBECOLOR_VERSION}_Linux_x86_64.tar.gz | sudo tar xz -C /usr/local/bin kubecolor
 kubecolor version --client
 
