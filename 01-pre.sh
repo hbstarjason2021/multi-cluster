@@ -69,7 +69,7 @@ curl -sSL https://github.com/hidetatz/kubecolor/releases/download/v${KUBECOLOR_V
 kubecolor version --client
 
 ### Install kubectx
-apt install jq -y
+## apt install jq -y
 
 KUBECTX_VERSION="v0.9.5"
 # KUBECTX_VERSION=$(curl -s https://api.github.com/repos/ahmetb/kubectx/releases | jq -r '.[0].tag_name')
