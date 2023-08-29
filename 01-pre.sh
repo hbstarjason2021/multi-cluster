@@ -3,23 +3,46 @@ set -eux
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
 
-### Install KIND
-KIND_VERSION="${KIND_VERSION:-v0.20.0}"
+function getLocation() {
+    countryCode=$(curl -s "http://ip-api.com/line/?fields=countryCode")
+}
 
+###### Install KIND
+function install_kind(){
+
+KIND_VERSION="${KIND_VERSION:-v0.20.0}"
 ## KIND_CLUSTER_VERSION="${KIND_CLUSTER_VERSION:-v1.25.11}"
 
-if ! hash kind > /dev/null 2>&1 ; then
-    echo "# Installing KinD..."
-    curl -Lo /usr/bin/kind https://kind.sigs.k8s.io/dl/${KIND_VERSION}/kind-linux-amd64 && chmod +x /usr/bin/kind
-    # curl -Lo /usr/bin/kind  https://jihulab.com/hbstarjason/ali-init/-/raw/main/kind-linux-amd64-v0.20.0 && chmod +x /usr/bin/kind
+if [ "$countryCode" == "CN" ]; then
+echo -e "${Info} 检测到国内环境，正在使用镜像下载"
+  curl -Lo /usr/bin/kind  https://jihulab.com/hbstarjason/ali-init/-/raw/main/kind-linux-amd64-v0.20.0 && chmod +x /usr/bin/kind
+else
+  curl -Lo /usr/bin/kind https://kind.sigs.k8s.io/dl/${KIND_VERSION}/kind-linux-amd64 && chmod +x /usr/bin/kind
+fi
+    
+  kind version
+}
+
+###### Install Kubectl
+function install_kubectl() {
+
+if [ "$countryCode" == "CN" ]; then
+echo -e "${Info} 检测到国内环境，正在使用镜像下载"
+  curl -L -o /usr/bin/kubectl "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && chmod +x /usr/bin/kubectl
+else
+  curl -L "https://jihulab.com/hbstarjason/ali-init/-/raw/main/kubectl-v1.27.3" -o /usr/local/bin/kubectl && chmod +x /usr/local/bin/kubectl
 fi
 
-kind version 
-
-### Install Kubectl 
-curl -L -o /usr/bin/kubectl "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && chmod +x /usr/bin/kubectl
-# curl -L "https://jihulab.com/hbstarjason/ali-init/-/raw/main/kubectl-v1.27.3" -o /usr/local/bin/kubectl && chmod +x /usr/local/bin/kubectl
 kubectl version --client
+}
+
+
+getLocation
+
+install_kind
+install_kubectl
+
+
 
 ### Install kubecolor
 KUBECOLOR_VERSION="0.0.25"
