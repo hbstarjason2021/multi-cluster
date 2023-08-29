@@ -18,7 +18,7 @@ KIND_VERSION="${KIND_VERSION:-v0.20.0}"
 ## KIND_CLUSTER_VERSION="${KIND_CLUSTER_VERSION:-v1.25.11}"
 
 if [ "$countryCode" == "CN" ]; then
-echo -e "检测到国内环境，正在使用镜像下载"
+echo -e "检测到国内环境，正在使用镜像下载kind"
   curl -Lo /usr/bin/kind  https://jihulab.com/hbstarjason/ali-init/-/raw/main/kind-linux-amd64-v0.20.0 && chmod +x /usr/bin/kind
 else
   curl -Lo /usr/bin/kind https://kind.sigs.k8s.io/dl/${KIND_VERSION}/kind-linux-amd64 && chmod +x /usr/bin/kind
@@ -31,7 +31,7 @@ fi
 function install_kubectl() {
 
 if [ "$countryCode" == "CN" ]; then
-echo -e "检测到国内环境，正在使用镜像下载"
+echo -e "检测到国内环境，正在使用镜像下载kubectl"
   curl -L "https://jihulab.com/hbstarjason/ali-init/-/raw/main/kubectl-v1.27.3" -o /usr/local/bin/kubectl && chmod +x /usr/local/bin/kubectl
 else
   curl -L -o /usr/bin/kubectl "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && chmod +x /usr/bin/kubectl
@@ -49,7 +49,7 @@ KUBECTX_VERSION="v0.9.5"
 # KUBECTX_VERSION=$(curl -s -N https://api.github.com/repos/ahmetb/kubectx/releases | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/' | head -n 1)
 
 if [ "$countryCode" == "CN" ]; then
-echo -e "检测到国内环境，正在使用镜像下载"
+echo -e "检测到国内环境，正在使用镜像下载Kubectx"
   curl  https://jihulab.com/hbstarjason/ali-init/-/raw/main/kubectx_v0.9.5_linux_x86_64.tar.gz | sudo tar xz -C /usr/local/bin kubectx
 else
   curl -sSL https://github.com/ahmetb/kubectx/releases/download/${KUBECTX_VERSION}/kubectx_${KUBECTX_VERSION}_linux_x86_64.tar.gz | sudo tar xz -C /usr/local/bin kubectx
@@ -64,7 +64,7 @@ KUBECOLOR_VERSION="0.0.25"
 # latestURL=$(curl -s https://api.github.com/repos/hidetatz/kubecolor/releases/latest | grep -i "browser_download_url.*${osDistribution}.*${archParam}" | awk -F '"' '{print $4}')
 
 if [ "$countryCode" == "CN" ]; then
-echo -e "检测到国内环境，正在使用镜像下载"
+echo -e "检测到国内环境，正在使用镜像下载kubecolor"
   curl https://jihulab.com/hbstarjason/ali-init/-/raw/main/kubecolor_0.0.25_Linux_x86_64.tar.gz | sudo tar xz -C /usr/local/bin kubecolor
 else
   curl -sSL https://github.com/hidetatz/kubecolor/releases/download/v${KUBECOLOR_VERSION}/kubecolor_${KUBECOLOR_VERSION}_Linux_x86_64.tar.gz | sudo tar xz -C /usr/local/bin kubecolor
@@ -79,7 +79,7 @@ kubecolor version --client
 function install_helm() {
 
 if [ "$countryCode" == "CN" ]; then
-echo -e "检测到国内环境，正在使用镜像下载"
+echo -e "检测到国内环境，正在使用镜像下载Helm"
   curl -sSL https://jihulab.com/hbstarjason/ali-init/-/raw/main/helm-v3.11.3-linux-amd64.tar.gz | sudo tar xz -C /usr/local/bin --strip-components=1 linux-amd64/helm
 else
   curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash  
@@ -106,7 +106,7 @@ terraform -install-autocomplete
 function install_nexttrace() {
 
 if [ "$countryCode" == "CN" ]; then
-echo -e "检测到国内环境，正在使用镜像下载"
+echo -e "检测到国内环境，正在使用镜像下载nexttrace"
   bash <(curl -Ls https://ghproxy.com/https://raw.githubusercontent.com/sjlleo/nexttrace/main/nt_install.sh)
 else
   bash <(curl -Ls https://raw.githubusercontent.com/sjlleo/nexttrace/main/nt_install.sh)
