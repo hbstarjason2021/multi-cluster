@@ -42,6 +42,7 @@ kubectl version --client
 
 ###### Install Kubectx
 function install_kubectx() {
+## apt install jq -y
 
 KUBECTX_VERSION="v0.9.5"
 # KUBECTX_VERSION=$(curl -s https://api.github.com/repos/ahmetb/kubectx/releases | jq -r '.[0].tag_name')
@@ -54,9 +55,25 @@ else
   curl -sSL https://github.com/ahmetb/kubectx/releases/download/${KUBECTX_VERSION}/kubectx_${KUBECTX_VERSION}_linux_x86_64.tar.gz | sudo tar xz -C /usr/local/bin kubectx
 fi
 
-## apt install jq -y
+}
+
+### Install kubecolor
+function install_kubecolor() {
+KUBECOLOR_VERSION="0.0.25"
+# KUBECOLOR_VERSION=$(curl -s -N https://api.github.com/repos/hidetatz/kubecolor/releases | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/' | head -n 1)
+# latestURL=$(curl -s https://api.github.com/repos/hidetatz/kubecolor/releases/latest | grep -i "browser_download_url.*${osDistribution}.*${archParam}" | awk -F '"' '{print $4}')
+
+if [ "$countryCode" == "CN" ]; then
+echo -e "检测到国内环境，正在使用镜像下载"
+  curl https://jihulab.com/hbstarjason/ali-init/-/raw/main/kubecolor_0.0.25_Linux_x86_64.tar.gz | sudo tar xz -C /usr/local/bin kubecolor
+else
+  curl -sSL https://github.com/hidetatz/kubecolor/releases/download/v${KUBECOLOR_VERSION}/kubecolor_${KUBECOLOR_VERSION}_Linux_x86_64.tar.gz | sudo tar xz -C /usr/local/bin kubecolor
+fi
+
+kubecolor version --client
 
 }
+
 
 ### Install Helm 
 function install_kubectx() {
@@ -71,6 +88,16 @@ fi
 helm version 
 }
 
+### Install terraform
+function install_terraform() {
+TF_VERSION="1.5.6"
+curl -LO https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip
+unzip terraform_${TF_VERSION}_linux_amd64.zip
+mv terraform /usr/local/bin
+terraform version   
+terraform -install-autocomplete
+
+}
 
 
 ###### Install nexttrace
@@ -92,28 +119,12 @@ getLocation
 install_kind
 install_kubectl
 install_kubectx
+install_kubecolor
 install_helm
+install_terraform
 
 install_nexttrace
 
-
-### Install kubecolor
-KUBECOLOR_VERSION="0.0.25"
-# KUBECOLOR_VERSION=$(curl -s -N https://api.github.com/repos/hidetatz/kubecolor/releases | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/' | head -n 1)
-
-# latestURL=$(curl -s https://api.github.com/repos/hidetatz/kubecolor/releases/latest | grep -i "browser_download_url.*${osDistribution}.*${archParam}" | awk -F '"' '{print $4}')
-
-curl -sSL https://github.com/hidetatz/kubecolor/releases/download/v${KUBECOLOR_VERSION}/kubecolor_${KUBECOLOR_VERSION}_Linux_x86_64.tar.gz | sudo tar xz -C /usr/local/bin kubecolor
-kubecolor version --client
-
-
-### Install terraform
-TF_VERSION="1.5.6"
-curl -LO https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip
-unzip terraform_${TF_VERSION}_linux_amd64.zip
-mv terraform /usr/local/bin
-terraform version   
-terraform -install-autocomplete
 
 ### Install cilium
 ### https://docs.cilium.io/en/v1.10/gettingstarted/k8s-install-default/
