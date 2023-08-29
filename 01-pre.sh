@@ -121,7 +121,6 @@ install_kubectl
 install_kubectx
 install_kubecolor
 install_helm
-install_terraform
 
 install_nexttrace
 
@@ -134,3 +133,5 @@ sudo tar xzvfC cilium-linux-amd64.tar.gz /usr/local/bin
 rm cilium-linux-amd64.tar.gz{,.sha256sum}
 # cilium version
 
+
+install_terraform
