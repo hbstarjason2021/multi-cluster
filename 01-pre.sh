@@ -76,7 +76,7 @@ kubecolor version --client
 
 
 ### Install Helm 
-function install_kubectx() {
+function install_helm() {
 
 if [ "$countryCode" == "CN" ]; then
 echo -e "检测到国内环境，正在使用镜像下载"
