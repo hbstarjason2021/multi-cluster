@@ -80,9 +80,9 @@ function install_helm() {
 
 if [ "$countryCode" == "CN" ]; then
 echo -e "检测到国内环境，正在使用镜像下载"
-  curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
-else
   curl -sSL https://jihulab.com/hbstarjason/ali-init/-/raw/main/helm-v3.11.3-linux-amd64.tar.gz | sudo tar xz -C /usr/local/bin --strip-components=1 linux-amd64/helm
+else
+  curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash  
 fi
 
 helm version 
