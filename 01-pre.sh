@@ -103,6 +103,10 @@ helm version
 ### Install terraform
 function install_terraform() {
 TF_VERSION="1.5.6"
+
+## TF_VERSION=`curl -s https://api.github.com/repos/hashicorp/terraform/releases/latest | grep tag_name | cut -d: -f2 | tr -d \"\,\v | awk '{$1=$1};1'`
+## wget https://releases.hashicorp.com/terraform/${TER_VER}/terraform_${TER_VER}_linux_amd64.zip
+
 curl -LO https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip
 unzip terraform_${TF_VERSION}_linux_amd64.zip
 mv terraform /usr/local/bin
