@@ -21,6 +21,12 @@ function getLocation() {
     countryCode=$(curl -s "http://ip-api.com/line/?fields=countryCode")
 }
 
+red="\033[31m"
+green="\033[32m"
+yellow="\033[33m"
+white="\033[0m"
+
+
 ###### Install KIND
 function install_kind(){
 
@@ -37,6 +43,7 @@ else
 fi
     
   kind version
+  echo -e "${green}kind is already installed${white}"
 }
 
 ###### Install Kubectl
@@ -50,6 +57,7 @@ else
 fi
 
 kubectl version --client
+echo -e "${green}kubectl is already installed${white}"
 }
 
 ###### Install Kubectx
@@ -67,6 +75,7 @@ else
   curl -sSL https://github.com/ahmetb/kubectx/releases/download/${KUBECTX_VERSION}/kubectx_${KUBECTX_VERSION}_linux_x86_64.tar.gz | sudo tar xz -C /usr/local/bin kubectx
 fi
 
+echo -e "${green}kubectx is already installed${white}"
 }
 
 ### Install kubecolor
@@ -83,7 +92,7 @@ else
 fi
 
 kubecolor version --client
-
+echo -e "${green}kubecolor is already installed${white}"
 }
 
 
@@ -98,6 +107,7 @@ else
 fi
 
 helm version 
+echo -e "${green}Helm is already installed${white}"
 }
 
 ### Install terraform
@@ -112,7 +122,7 @@ unzip terraform_${TF_VERSION}_linux_amd64.zip
 mv terraform /usr/local/bin
 terraform version   
 ## terraform -install-autocomplete
-
+echo -e "${green}terraform is already installed${white}"
 }
 
 
