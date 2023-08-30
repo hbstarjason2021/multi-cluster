@@ -7,6 +7,16 @@ set -eux
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
 
+# Find a suitable install location
+for CANDIDATE in "$HOME/bin" "/usr/local/bin" "/usr/bin"; do
+  if [[ -w $CANDIDATE ]] && grep -q "$CANDIDATE" <<<"$PATH"; then
+    TARGET_DIR="$CANDIDATE"
+    break
+  fi
+done
+
+ARCH=$(uname -m | sed -e 's/x86_64/amd64/' -e 's/aarch64/arm64/')
+
 function getLocation() {
     countryCode=$(curl -s "http://ip-api.com/line/?fields=countryCode")
 }
@@ -21,7 +31,9 @@ if [ "$countryCode" == "CN" ]; then
 echo -e "检测到国内环境，正在使用镜像下载kind"
   curl -Lo /usr/bin/kind  https://jihulab.com/hbstarjason/ali-init/-/raw/main/kind-linux-amd64-v0.20.0 && chmod +x /usr/bin/kind
 else
-  curl -Lo /usr/bin/kind https://kind.sigs.k8s.io/dl/${KIND_VERSION}/kind-linux-amd64 && chmod +x /usr/bin/kind
+  ## curl -Lo /usr/bin/kind https://kind.sigs.k8s.io/dl/${KIND_VERSION}/kind-linux-amd64 && chmod +x /usr/bin/kind
+  curl --fail --progress-bar --location "https://kind.sigs.k8s.io/dl/${KIND_VERSION}/kind-linux-${ARCH}" --output "${TARGET_DIR}/kind"
+  chmod a+rx "${TARGET_DIR}/kind"
 fi
     
   kind version
