@@ -132,12 +132,23 @@ echo -e "${green}terraform is already installed${white}"
 function install_nexttrace() {
 
 if [ "$countryCode" == "CN" ]; then
-echo -e "检测到国内环境，正在使用镜像下载nexttrace"
+echo -e "${yellow}检测到国内环境，正在使用镜像下载nexttrace${white}"
   bash <(curl -Ls https://ghproxy.com/https://raw.githubusercontent.com/sjlleo/nexttrace/main/nt_install.sh)
 else
   bash <(curl -Ls https://raw.githubusercontent.com/sjlleo/nexttrace/main/nt_install.sh)
 fi
 
+}
+
+### Install cilium
+### https://docs.cilium.io/en/v1.10/gettingstarted/k8s-install-default/
+function install_cilium() {
+
+curl -L --remote-name-all https://github.com/cilium/cilium-cli/releases/latest/download/cilium-linux-amd64.tar.gz{,.sha256sum}
+sha256sum --check cilium-linux-amd64.tar.gz.sha256sum
+sudo tar xzvfC cilium-linux-amd64.tar.gz /usr/local/bin
+rm cilium-linux-amd64.tar.gz{,.sha256sum}
+# cilium version
 }
 
 getLocation
@@ -149,17 +160,6 @@ install_kubecolor
 install_helm
 
 ## install_nexttrace
-
-
-### Install cilium
-### https://docs.cilium.io/en/v1.10/gettingstarted/k8s-install-default/
-function install_nexttrace() {
-
-curl -L --remote-name-all https://github.com/cilium/cilium-cli/releases/latest/download/cilium-linux-amd64.tar.gz{,.sha256sum}
-sha256sum --check cilium-linux-amd64.tar.gz.sha256sum
-sudo tar xzvfC cilium-linux-amd64.tar.gz /usr/local/bin
-rm cilium-linux-amd64.tar.gz{,.sha256sum}
-# cilium version
-}
+## install_cilium
 
 install_terraform
