@@ -69,7 +69,7 @@ KUBECTX_VERSION="v0.9.5"
 # KUBECTX_VERSION=$(curl -s -N https://api.github.com/repos/ahmetb/kubectx/releases | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/' | head -n 1)
 
 if [ "$countryCode" == "CN" ]; then
-echo -e "检测到国内环境，正在使用镜像下载Kubectx"
+echo -e "${yellow}检测到国内环境，正在使用镜像下载Kubectx${white}"
   curl  https://jihulab.com/hbstarjason/ali-init/-/raw/main/kubectx_v0.9.5_linux_x86_64.tar.gz | sudo tar xz -C /usr/local/bin kubectx
 else
   curl -sSL https://github.com/ahmetb/kubectx/releases/download/${KUBECTX_VERSION}/kubectx_${KUBECTX_VERSION}_linux_x86_64.tar.gz | sudo tar xz -C /usr/local/bin kubectx
@@ -85,7 +85,7 @@ KUBECOLOR_VERSION="0.0.25"
 # latestURL=$(curl -s https://api.github.com/repos/hidetatz/kubecolor/releases/latest | grep -i "browser_download_url.*${osDistribution}.*${archParam}" | awk -F '"' '{print $4}')
 
 if [ "$countryCode" == "CN" ]; then
-echo -e "检测到国内环境，正在使用镜像下载kubecolor"
+echo -e "${yellow}检测到国内环境，正在使用镜像下载kubecolor${white}"
   curl https://jihulab.com/hbstarjason/ali-init/-/raw/main/kubecolor_0.0.25_Linux_x86_64.tar.gz | sudo tar xz -C /usr/local/bin kubecolor
 else
   curl -sSL https://github.com/hidetatz/kubecolor/releases/download/v${KUBECOLOR_VERSION}/kubecolor_${KUBECOLOR_VERSION}_Linux_x86_64.tar.gz | sudo tar xz -C /usr/local/bin kubecolor
@@ -100,7 +100,7 @@ echo -e "${green}kubecolor is already installed${white}"
 function install_helm() {
 
 if [ "$countryCode" == "CN" ]; then
-echo -e "检测到国内环境，正在使用镜像下载Helm"
+echo -e "${yellow}检测到国内环境，正在使用镜像下载Helm${white}"
   curl -sSL https://jihulab.com/hbstarjason/ali-init/-/raw/main/helm-v3.11.3-linux-amd64.tar.gz | sudo tar xz -C /usr/local/bin --strip-components=1 linux-amd64/helm
 else
   curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash  
@@ -153,11 +153,13 @@ install_helm
 
 ### Install cilium
 ### https://docs.cilium.io/en/v1.10/gettingstarted/k8s-install-default/
+function install_nexttrace() {
+
 curl -L --remote-name-all https://github.com/cilium/cilium-cli/releases/latest/download/cilium-linux-amd64.tar.gz{,.sha256sum}
 sha256sum --check cilium-linux-amd64.tar.gz.sha256sum
 sudo tar xzvfC cilium-linux-amd64.tar.gz /usr/local/bin
 rm cilium-linux-amd64.tar.gz{,.sha256sum}
 # cilium version
-
+}
 
 install_terraform
