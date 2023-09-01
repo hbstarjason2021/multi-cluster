@@ -148,7 +148,7 @@ install_kubectx
 install_kubecolor
 install_helm
 
-install_nexttrace
+## install_nexttrace
 
 
 ### Install cilium
