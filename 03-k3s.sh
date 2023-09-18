@@ -1,5 +1,5 @@
 #curl -sfL https://get.k3s.io | sh -
-#curl -sfL https://get.k3s.io  | INSTALL_K3S_VERSION=v1.17.3 sh -
+#curl -sfL https://get.k3s.io  | INSTALL_K3S_VERSION=v1.25.10%2Bk3s1 sh -
 #curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC_="--docker"  sh -s -
 
 curl -sfL https://get.k3s.io | sh -s - --disable=traefik
