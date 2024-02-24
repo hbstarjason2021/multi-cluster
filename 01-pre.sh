@@ -28,6 +28,9 @@ white="\033[0m"
 
 
 ###### Install KIND
+
+##### [ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.20.0/kind-linux-amd64
+
 function install_kind(){
 
 KIND_VERSION="${KIND_VERSION:-v0.20.0}"
